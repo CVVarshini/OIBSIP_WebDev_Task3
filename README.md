@@ -3,7 +3,7 @@
 ## 🌡️ Temperature Converter Application
 
 ### **Name:** Varshini C V  
-### **Email:** varsh281299@gmail.com  
+### **Email:** varshcv2309@gmail.com  
 ### **Domain:** Web Development & Design Internship  
 ### **Task Title:** Temperature Conversion App
 
