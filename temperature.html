@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Temperature Converter</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+  <div class="container mt-5">
+    <h2 class="text-center mb-4">Temperature Converter</h2>
+    
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <!-- Temperature Input -->
+        <div class="mb-3">
+          <label for="temperature" class="form-label">Enter Temperature</label>
+          <input type="text" class="form-control" id="temperature" placeholder="e.g., 37">
+        </div>
+
+        <!-- Unit Selection with Radio Buttons -->
+        <div class="mb-3">
+          <label class="form-label">Select Unit</label>
+          <div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="unit" id="celsius" value="celsius" checked>
+              <label class="form-check-label" for="celsius">Celsius</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="unit" id="fahrenheit" value="fahrenheit">
+              <label class="form-check-label" for="fahrenheit">Fahrenheit</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="unit" id="kelvin" value="kelvin">
+              <label class="form-check-label" for="kelvin">Kelvin</label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Convert Button -->
+        <button class="btn btn-primary w-100" id="convertBtn">Convert</button>
+
+        <!-- Result Display -->
+        <div class="mt-4">
+          <h4>Converted Temperature:</h4>
+          <p id="result" class="fs-5 fw-bold"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript -->
+  <script>
+    document.getElementById('convertBtn').addEventListener('click', function() {
+      const tempInput = document.getElementById('temperature').value.trim();
+      const result = document.getElementById('result');
+
+      // Validate input
+      if (tempInput === '' || isNaN(tempInput)) {
+        result.textContent = 'Please enter a valid number!';
+        result.classList.add('text-danger');
+        return;
+      }
+
+      const temp = parseFloat(tempInput);
+
+      // Get selected unit
+      const unit = document.querySelector('input[name="unit"]:checked').value;
+      let converted;
+
+      if (unit === 'celsius') {
+        converted = `Fahrenheit: ${(temp * 9/5 + 32).toFixed(2)}°F | Kelvin: ${(temp + 273.15).toFixed(2)}K`;
+      } else if (unit === 'fahrenheit') {
+        converted = `Celsius: ${((temp - 32) * 5/9).toFixed(2)}°C | Kelvin: ${(((temp - 32) * 5/9) + 273.15).toFixed(2)}K`;
+      } else if (unit === 'kelvin') {
+        converted = `Celsius: ${(temp - 273.15).toFixed(2)}°C | Fahrenheit: ${((temp - 273.15) * 9/5 + 32).toFixed(2)}°F`;
+      }
+
+      result.textContent = converted;
+      result.classList.remove('text-danger');
+      result.classList.add('text-success');
+    });
+  </script>
+</body>
+</html>
